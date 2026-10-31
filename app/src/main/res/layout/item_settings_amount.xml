@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
+
+    <TextView
+        android:id="@+id/settings_amount_label"
+        style="@style/Settings.Text.Body"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@color/settings_text" />
+
+    <EditText
+        android:id="@+id/settings_amount_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/settings_input"
+        android:fontFamily="sans-serif-medium"
+        android:hint="@string/settings_amount_placeholder"
+        android:imeOptions="actionNext"
+        android:importantForAutofill="no"
+        android:inputType="numberDecimal"
+        android:maxLength="32"
+        android:minHeight="56dp"
+        android:paddingStart="16dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="10dp"
+        android:saveEnabled="false"
+        android:selectAllOnFocus="false"
+        android:singleLine="true"
+        android:textColor="@color/settings_text"
+        android:textColorHint="@color/settings_text_secondary"
+        android:textSize="24sp" />
+</LinearLayout>

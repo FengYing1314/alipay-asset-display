@@ -1,0 +1,52 @@
+name: 问题报告
+description: 报告可复现的界面、配置、适配或构建问题
+body:
+  - type: markdown
+    attributes:
+      value: 请先查阅 README 的支持范围。安全问题请按 SECURITY.md 私密报告；不要附真实金额、账户、基金名称、设备标识或原始页面转储。
+  - type: input
+    id: version
+    attributes:
+      label: 模块版本
+      description: 填写安装包版本或源码提交版本。
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: 环境版本
+      description: Android、支付宝与 LSPosed/API 版本；构建问题填写系统和 JDK 版本即可。
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: 影响范围
+      options:
+        - 设置与配置
+        - 原生金额页面
+        - Web 金额页面
+        - 余额详情
+        - 构建、测试或文档
+        - 其他
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: 复现步骤
+      description: 用合成值说明，列出必要的页面操作和开关状态。
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: 预期与实际结果
+      description: 说明发生了什么，以及你预期的行为。
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 脱敏验证信息（可选）
+      description: 仅提供必要的固定分类、计数、布尔状态或构建错误摘要。

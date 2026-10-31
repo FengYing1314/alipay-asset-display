@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/settings_scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:id="@+id/settings_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        android:paddingTop="28dp"
+        android:paddingBottom="28dp">
+
+        <TextView
+            style="@style/Settings.Text.Body"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/settings_subtitle"
+            android:textColor="@color/settings_primary" />
+
+        <TextView
+            style="@style/Settings.Text.Section"
+            android:layout_marginTop="8dp"
+            android:text="@string/app_name"
+            android:textSize="32sp" />
+
+        <TextView
+            style="@style/Settings.Text.Body"
+            android:layout_marginTop="10dp"
+            android:text="@string/settings_intro" />
+
+        <LinearLayout
+            style="@style/Settings.Card"
+            android:layout_marginTop="24dp">
+
+            <TextView
+                style="@style/Settings.Text.Section"
+                android:text="@string/settings_framework_title"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/settings_framework_status"
+                style="@style/Settings.Text.Body"
+                android:layout_marginTop="8dp"
+                android:accessibilityLiveRegion="polite"
+                android:text="@string/settings_framework_initial" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/Settings.Card"
+            android:layout_marginTop="12dp">
+
+            <Switch
+                android:id="@+id/settings_enabled"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:minHeight="48dp"
+                android:saveEnabled="false"
+                android:switchPadding="16dp"
+                android:text="@string/settings_enabled"
+                android:textColor="@color/settings_text"
+                android:textSize="18sp" />
+
+            <TextView
+                style="@style/Settings.Text.Body"
+                android:layout_marginTop="4dp"
+                android:text="@string/settings_enabled_hint" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/Settings.Text.Section"
+            android:layout_marginTop="28dp"
+            android:text="@string/settings_amounts_title" />
+
+        <TextView
+            style="@style/Settings.Text.Body"
+            android:layout_marginTop="6dp"
+            android:text="@string/settings_amounts_hint" />
+
+        <LinearLayout
+            style="@style/Settings.Card"
+            android:layout_marginTop="12dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <include android:id="@+id/settings_balance_row" layout="@layout/item_settings_amount" />
+            <include android:id="@+id/settings_yuebao_row" layout="@layout/item_settings_amount" />
+            <include android:id="@+id/settings_fund_row" layout="@layout/item_settings_amount" />
+            <include android:id="@+id/settings_total_row" layout="@layout/item_settings_amount" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/Settings.Text.Body"
+            android:layout_marginTop="12dp"
+            android:text="@string/settings_amount_rules" />
+
+        <TextView
+            style="@style/Settings.Text.Body"
+            android:layout_marginTop="20dp"
+            android:text="@string/settings_compatibility"
+            android:textSize="12sp" />
+
+        <LinearLayout
+            style="@style/Settings.Card"
+            android:layout_marginTop="20dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+
+            <Button
+                android:id="@+id/settings_advanced_toggle"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start|center_vertical"
+                android:minHeight="48dp"
+                android:padding="0dp"
+                android:text="@string/settings_advanced_expand"
+                android:textAllCaps="false"
+                android:textColor="@color/settings_text"
+                android:textSize="15sp" />
+
+            <LinearLayout
+                android:id="@+id/settings_advanced_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="12dp"
+                android:visibility="gone">
+
+                <Switch
+                    android:id="@+id/settings_diagnostics"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:saveEnabled="false"
+                    android:switchPadding="16dp"
+                    android:text="@string/settings_diagnostics"
+                    android:textColor="@color/settings_text"
+                    android:textSize="16sp" />
+
+                <TextView
+                    style="@style/Settings.Text.Body"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/settings_diagnostics_hint"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/settings_save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/settings_button"
+            android:enabled="false"
+            android:fontFamily="sans-serif-medium"
+            android:minHeight="56dp"
+            android:padding="16dp"
+            android:text="@string/settings_save"
+            android:textAllCaps="false"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/settings_save_status"
+            style="@style/Settings.Text.Body"
+            android:layout_marginTop="12dp"
+            android:accessibilityLiveRegion="polite"
+            android:text="@string/settings_save_initial" />
+    </LinearLayout>
+</ScrollView>

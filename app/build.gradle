@@ -1,0 +1,94 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace = 'io.github.fengying.alipaydisplay'
+    compileSdk {
+        version = release(37) {
+            minorApiLevel = 2
+        }
+    }
+    buildToolsVersion = '37.0.0'
+
+    defaultConfig {
+        applicationId = 'io.github.fengying.alipaydisplay'
+        minSdk = 28
+        targetSdk = 35
+        versionCode = 1
+        versionName = '0.1.0'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled = false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    compileOnly 'io.github.libxposed:api:102.0.0'
+    implementation 'io.github.libxposed:service:102.0.0'
+    testImplementation 'junit:junit:4.13.2'
+}
+
+// SDK回调是抽象类；编译桩不进APK，单一桥接类在宿主loader下仅从内存加载。
+def visualStub = tasks.register('compileVisualStateStub', JavaCompile) {
+    source = fileTree('src/visualStateStub/java') { include '**/*.java' }
+    classpath = files()
+    destinationDirectory = layout.buildDirectory.dir('intermediates/visualStateStub')
+    options.release = 17
+}
+def visualBridge = tasks.register('compileVisualStateBridge', JavaCompile) {
+    source = fileTree('src/visualStateBridge/java') { include '**/*.java' }
+    classpath = files(visualStub.flatMap { it.destinationDirectory })
+    destinationDirectory = layout.buildDirectory.dir('intermediates/visualStateBridge/classes')
+    options.release = 17
+}
+def visualDexDirectory = layout.buildDirectory.dir('intermediates/visualStateBridge/dex')
+def visualDex = tasks.register('dexVisualStateBridge', Exec) {
+    dependsOn visualBridge
+    inputs.files(visualBridge.flatMap { it.destinationDirectory })
+    inputs.files(visualStub.flatMap { it.destinationDirectory })
+    outputs.dir(visualDexDirectory)
+    doFirst {
+        def sdk = androidComponents.sdkComponents.sdkDirectory.get().asFile
+        def boot = androidComponents.sdkComponents.bootClasspath.get().find { it.asFile.name == 'android.jar' }.asFile
+        def output = visualDexDirectory.get().asFile
+        output.mkdirs()
+        commandLine new File(sdk, "build-tools/${android.buildToolsVersion}/d8"),
+                '--min-api', '28', '--lib', boot,
+                '--classpath', visualStub.get().destinationDirectory.get().asFile,
+                '--output', output,
+                new File(visualBridge.get().destinationDirectory.get().asFile,
+                        'io/github/fengying/alipaydisplay/bridge/VisualStateBridge.class')
+    }
+}
+def visualResources = layout.buildDirectory.dir('generated/visualStateBridge/resources')
+abstract class PackageVisualStateBridge extends DefaultTask {
+    @InputDirectory @PathSensitive(PathSensitivity.RELATIVE)
+    abstract DirectoryProperty getDexDirectory()
+    @OutputDirectory
+    abstract DirectoryProperty getOutputDirectory()
+
+    @TaskAction void packageBridge() {
+        def source = dexDirectory.file('classes.dex').get().asFile
+        def target = outputDirectory.file('io/github/fengying/alipaydisplay/visual-state-bridge.dex').get().asFile
+        target.parentFile.mkdirs()
+        java.nio.file.Files.copy(source.toPath(), target.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING)
+    }
+}
+def copyVisualDex = tasks.register('copyVisualStateBridge', PackageVisualStateBridge) {
+    dependsOn visualDex
+    dexDirectory.set(visualDexDirectory)
+    outputDirectory.set(visualResources)
+}
+androidComponents.onVariants(androidComponents.selector().all()) { variant ->
+    variant.sources.resources.addGeneratedSourceDirectory(copyVisualDex) { it.outputDirectory }
+}
+tasks.named('preBuild').configure { dependsOn copyVisualDex }

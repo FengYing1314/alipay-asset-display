@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">支付宝资产显示修改</string>
+    <string name="module_description">仅在已验证的支付宝页面显示自定义金额，不改变实际资产。</string>
+</resources>

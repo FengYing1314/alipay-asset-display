@@ -1,0 +1,9 @@
+.git/
+.gradle/
+.local/
+.idea/
+node_modules/
+**/build/
+gradle/wrapper/
+gradlew
+gradlew.bat

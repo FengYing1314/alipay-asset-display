@@ -1,0 +1,16 @@
+.idea/
+.local/
+.gradle/
+**/build/
+local.properties
+*.apk
+*.aab
+*.apks
+*.jks
+*.keystore
+*.hprof
+captures/
+.DS_Store
+node_modules/
+__pycache__/
+*.pyc

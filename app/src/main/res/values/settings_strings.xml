@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_subtitle">本机显示配置</string>
+    <string name="settings_intro">为已适配页面设置独立显示金额，不改变账户真实资产或支付能力。</string>
+    <string name="settings_framework_title">框架连接</string>
+    <string name="settings_framework_initial">未连接框架：请在 LSPosed 中启用本模块。</string>
+    <string name="settings_framework_disconnected">未连接框架：请在 LSPosed 中启用本模块后重新打开设置。</string>
+    <string name="settings_framework_checking">正在检查框架与配置…</string>
+    <string name="settings_framework_unsupported">不支持：需要 API 102 及远程配置能力。</string>
+    <string name="settings_framework_connected">已连接 %1$s %2$s · API %3$d</string>
+    <string name="settings_framework_failed">读取框架失败，请重新打开设置。</string>
+    <string name="settings_enabled">启用金额显示</string>
+    <string name="settings_enabled_hint">保存后生效，请重新进入目标页面查看。</string>
+    <string name="settings_amounts_title">显示金额</string>
+    <string name="settings_amounts_hint">四项独立设置，总资产不会自动求和。</string>
+    <string name="settings_balance">余额（元）</string>
+    <string name="settings_yuebao">余额宝（元）</string>
+    <string name="settings_fund">基金（元）</string>
+    <string name="settings_total">总资产（元）</string>
+    <string name="settings_amount_placeholder">0.00</string>
+    <string name="settings_amount_rules">支持 0～999,999,999.99，最多两位小数。请使用普通数字，不含逗号。</string>
+    <string name="settings_compatibility">适用支付宝 12.12.36.8000：理财首页、总资产详情、余额详情、余额宝顶部总金额、基金持有页顶部汇总。</string>
+    <string name="settings_advanced_expand">高级设置 · 展开</string>
+    <string name="settings_advanced_collapse">高级设置 · 收起</string>
+    <string name="settings_advanced_active">高级设置 · 诊断已开启 · 展开</string>
+    <string name="settings_diagnostics">采集页面结构（诊断）</string>
+    <string name="settings_diagnostics_hint">默认关闭。仅向系统日志输出允许的结构标签、类型、层级和隐藏状态，不含金额、账户或基金名称。通过 ADB 查看 AlipayDisplayDiag 标签。</string>
+    <string name="settings_save">保存配置</string>
+    <string name="settings_saving">正在保存…</string>
+    <string name="settings_save_initial">尚未保存。请填写希望在本机显示的金额。</string>
+    <string name="settings_save_edited">尚未保存；当前输入仅作为本机草稿。</string>
+    <string name="settings_draft_restored">已恢复未保存的本机草稿，请保存后再查看显示效果。</string>
+    <string name="settings_config_enabled">已读取配置：请求启用金额显示，尚未确认目标页面应用结果。</string>
+    <string name="settings_config_disabled">已读取配置：请求停用金额显示；若页面仍有旧显示，请重新进入页面。</string>
+    <string name="settings_save_unavailable">保存失败：框架未连接或不支持远程配置。</string>
+    <string name="settings_save_invalid">保存失败：请检查金额格式。</string>
+    <string name="settings_invalid_amount">请输入 0～999999999.99，最多两位小数，不含逗号</string>
+    <string name="settings_saved_enabled">配置保存成功，已请求启用金额显示；尚未确认目标页面应用结果，请重新进入目标页面查看。</string>
+    <string name="settings_saved_disabled">配置保存成功，已请求停用金额显示；尚未确认页面恢复结果，请重新进入目标页面。</string>
+    <string name="settings_save_unconfirmed">未能确认保存结果，请恢复连接后重试。当前输入已保留。</string>
+</resources>

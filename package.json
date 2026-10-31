@@ -1,0 +1,19 @@
+{
+  "name": "alipay-asset-display",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "支付宝本机显示模块的开发和验证工具",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test app/src/test/js/*.test.js",
+    "format": "python3 scripts/format.py --write",
+    "format:check": "python3 scripts/format.py --check"
+  },
+  "devDependencies": {
+    "prettier": "3.9.6"
+  }
+}

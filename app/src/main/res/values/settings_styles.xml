@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.AssetDisplay.Settings" parent="@android:style/Theme.Material.Light.NoActionBar">
+        <item name="android:fontFamily">sans</item>
+        <item name="android:colorAccent">@color/settings_primary</item>
+        <item name="android:colorBackground">@color/settings_background</item>
+        <item name="android:windowBackground">@color/settings_background</item>
+        <item name="android:textColorPrimary">@color/settings_text</item>
+        <item name="android:textColorSecondary">@color/settings_text_secondary</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@color/settings_background</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+    </style>
+    <style name="Settings.Text.Body" parent="">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/settings_text_secondary</item>
+        <item name="android:lineSpacingExtra">3dp</item>
+    </style>
+    <style name="Settings.Text.Section" parent="Settings.Text.Body">
+        <item name="android:textColor">@color/settings_text</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:accessibilityHeading">true</item>
+    </style>
+    <style name="Settings.Card" parent="">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/settings_surface</item>
+        <item name="android:padding">20dp</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+</resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="settings_amount_balance" type="id" />
+    <item name="settings_amount_yuebao" type="id" />
+    <item name="settings_amount_fund" type="id" />
+    <item name="settings_amount_total" type="id" />
+</resources>

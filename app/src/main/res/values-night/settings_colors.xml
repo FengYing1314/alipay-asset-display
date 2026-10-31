@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="settings_background">#101B17</color>
+    <color name="settings_surface">#1B2A24</color>
+    <color name="settings_input_background">#15231D</color>
+    <color name="settings_text">#EDF6F1</color>
+    <color name="settings_text_secondary">#AFBFB6</color>
+    <color name="settings_outline">#43584C</color>
+    <color name="settings_primary">#8CDBBC</color>
+    <color name="settings_primary_pressed">#B5ECD5</color>
+    <color name="settings_on_primary">#102C20</color>
+    <color name="settings_disabled">#31473B</color>
+    <color name="settings_on_disabled">#A5B8AB</color>
+</resources>
