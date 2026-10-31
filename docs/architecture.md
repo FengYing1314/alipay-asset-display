@@ -65,6 +65,13 @@ flowchart LR
 
 应用 ID 和 Java 命名空间统一为 `io.github.fengying.alipaydisplay`。`META-INF/xposed/java_init.list` 指向 `io.github.fengying.alipaydisplay.ModuleEntry`；支付宝作用域仍为 `com.eg.android.AlipayGphone`。
 
+| 标识                    | 当前值                                              |
+| ----------------------- | --------------------------------------------------- |
+| 应用名称                | 支付宝资产显示修改                                  |
+| 应用 ID / Java 命名空间 | `io.github.fengying.alipaydisplay`                  |
+| LSPosed Java 入口       | `io.github.fengying.alipaydisplay.ModuleEntry`      |
+| 设置页 Activity         | `io.github.fengying.alipaydisplay.SettingsActivity` |
+
 ```text
 app/src/main/java/io/github/fengying/alipaydisplay/          模块源码
 app/src/test/java/io/github/fengying/alipaydisplay/          Java 测试
@@ -74,7 +81,7 @@ app/src/visualStateBridge/java/io/github/fengying/alipaydisplay/bridge/
 
 桥接类为 `io.github.fengying.alipaydisplay.bridge.VisualStateBridge`，生成资源为 `io/github/fengying/alipaydisplay/visual-state-bridge.dex`。源码目录、资源读取路径、桥接类名及生成任务须保持一致；宿主 SDK 的类名和包名不随模块包名迁移而改变。
 
-包名变化会改变 Android 应用身份及 LSPosed 模块配置归属。安装和重新启用步骤见 [包名迁移说明](../README.md#从旧包名迁移)。
+包名变化会改变 Android 应用身份及 LSPosed 模块配置归属。安装和重新启用步骤见 [包名迁移说明](usage.md#从旧包名迁移)。
 
 ## 资源与构建
 

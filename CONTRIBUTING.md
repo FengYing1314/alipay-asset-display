@@ -8,31 +8,61 @@
 | ------------ | ------------------------------------------------------------------ |
 | JDK          | 21，Java 源码与字节码目标为 17                                     |
 | Android SDK  | `platforms;android-37.2`、`build-tools;37.0.0`                     |
-| Gradle / AGP | 使用仓库 wrapper 和构建文件中的固定版本                            |
+| Gradle / AGP | 9.6.0 / 9.5.0，使用仓库自带 wrapper                                |
 | Node.js      | 26，与 CI 保持一致                                                 |
 | npm          | 随 Node.js 提供，使用 `npm ci --ignore-scripts` 安装锁定的开发工具 |
 | Python       | 3.9 或更新版本，仅使用标准库                                       |
 
 将 `JAVA_HOME` 和 `ANDROID_HOME` 指向本机对应目录，或通过未纳入版本管理的 `local.properties` 配置 SDK。不要提交个人路径、SDK、IDE 缓存或签名密钥。
 
-## 检查入口
+## 获取源码与构建
 
 ```bash
+git clone https://github.com/FengYing1314/alipay-asset-display.git
+cd alipay-asset-display
 npm ci --ignore-scripts
-sh scripts/check.sh
-```
-
-默认入口检查文本规范、Java/JavaScript/文档格式、脚本语法和 JavaScript 边界测试，不要求设备或 Android SDK。Java 格式工具首次使用需要联网下载，由项目脚本核验固定摘要。
-
-修改 Android 代码后运行完整检查：
-
-```bash
 sh scripts/check.sh --android
 ```
 
-这会额外运行 `:app:testDebugUnitTest`、`:app:assembleDebug` 和 `:app:lintDebug`。缓存齐全时可直接给 Gradle 增加 `--offline` 进行离线验证。格式调整使用 `npm run format`；检查模式不会重写源码。具体格式器版本以 `package-lock.json` 和 `scripts/format.py` 为准。
+完整检查包括文本规范、Java/JavaScript/文档格式、脚本语法、JavaScript 边界测试，以及 Java 单元测试、Debug 构建和 Android Lint。APK 输出到 `app/build/outputs/apk/debug/app-debug.apk`。这是开发用 Debug 包，安装、签名兼容和配置迁移要求见 [使用指南](docs/usage.md)。
 
-CI 分别执行格式/脚本检查与 Android 测试、构建和 Lint。CI 不连接手机，不修改账户，也不验证宿主界面的实际注入结果。
+首次获取依赖和格式工具需要网络；Java 格式工具由项目脚本核验固定摘要。缓存齐全后，可离线运行 Android 检查：
+
+```bash
+./gradlew --offline --no-daemon :app:testDebugUnitTest :app:assembleDebug :app:lintDebug
+```
+
+## 日常检查与格式
+
+只检查源码和脚本时运行以下命令，不要求设备或 Android SDK：
+
+```bash
+sh scripts/check.sh
+```
+
+修改 Android 代码后使用上方的 `sh scripts/check.sh --android` 运行完整检查。格式操作独立提供两个入口：
+
+```bash
+npm run format        # 应用统一格式
+npm run format:check  # 只检查，不重写源码
+```
+
+具体格式器版本以 `package-lock.json` 和 `scripts/format.py` 为准。[GitHub Actions](https://github.com/FengYing1314/alipay-asset-display/actions/workflows/ci.yml) 分别执行格式/脚本检查与 Android 测试、构建和 Lint。CI 不连接手机，不修改账户，也不验证宿主界面的实际注入结果；验证证据和限制见 [验证与诊断](docs/verification.md)。
+
+## 项目结构
+
+```text
+app/src/main/java/       设置、配置、框架入口与页面会话
+app/src/main/res/        设置页布局、文案与深浅色主题
+app/src/main/resources/  Web 显示脚本、模块元数据与第三方许可
+app/src/test/            Java 纯策略与 JavaScript DOM 边界测试
+app/src/visualState*/    SDK 回调桥源码及不打包的编译桩
+docs/                   使用、架构、验证范围与诊断说明
+scripts/                格式与检查入口
+.github/                CI、依赖更新及问题/PR 模板
+```
+
+组件职责和显示链路见 [架构说明](docs/architecture.md)。
 
 ## 代码和注释标准
 
@@ -72,7 +102,7 @@ SDK 反射名称、Android 回调、配置键、脚本命令/返回字段及持�
 
 本地验证应核对最终 APK 的应用 ID、设置页和模块入口，确认打包资源与桥接类位于新命名空间，并检查是否残留旧生成产物。历史设备验证不能自动视为新包名的实机验收；未执行的安装、配置迁移和设备检查需明确报告。
 
-新包名不会自动继承旧包名的草稿或 LSPosed 配置。不要把卸载旧应用、复制私有配置或安装到设备混入源码迁移；使用者操作见 [包名迁移说明](README.md#从旧包名迁移)。
+新包名不会自动继承旧包名的草稿或 LSPosed 配置。不要把卸载旧应用、复制私有配置或安装到设备混入源码迁移；使用者操作见 [包名迁移说明](docs/usage.md#从旧包名迁移)。
 
 ## 改动边界与验证
 
