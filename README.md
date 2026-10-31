@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/FengYing1314/alipay-asset-display/releases/tag/v0.1.0"><strong>下载 v0.1.0</strong></a> ·
+  <a href="https://github.com/FengYing1314/alipay-asset-display/releases/tag/v0.1.0"><strong>下载 APK</strong></a> ·
   <a href="docs/usage.md">使用指南</a> ·
   <a href="#常见问题">常见问题</a> ·
   <a href="https://github.com/FengYing1314/alipay-asset-display/issues/new/choose">问题反馈</a>
