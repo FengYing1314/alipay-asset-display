@@ -1,0 +1,9 @@
+Alipay Asset Display release signing identity
+
+Application ID: io.github.fengying.alipaydisplay
+First release: v1.0.0
+Certificate SHA-256: 68:87:63:12:3D:33:8D:AC:C8:19:DB:FD:83:7E:C5:31:0B:CF:72:B2:B1:76:CE:25:BB:D1:37:E5:2F:26:CF:9D
+
+Use apksigner verify --verbose --print-certs to verify release APKs.
+SHA256SUMS records file hashes; this file records the signing certificate.
+Development Debug packages use a different signing identity.

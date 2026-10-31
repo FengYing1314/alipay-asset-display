@@ -4,7 +4,7 @@
         android:name=".ModuleApp"
         android:allowBackup="false"
         android:description="@string/module_description"
-        android:icon="@drawable/ic_asset_display"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AssetDisplay.Settings">

@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/assets/icon.svg" width="72" height="72" alt="支付宝资产显示修改图标" />
+  <img src="docs/assets/icon.png" width="72" height="72" alt="支付宝资产显示修改图标" />
 </p>
 
 <h1 align="center">支付宝资产显示修改</h1>
@@ -8,12 +8,12 @@
 
 <p align="center">
   <a href="https://github.com/FengYing1314/alipay-asset-display/actions/workflows/ci.yml"><img src="https://github.com/FengYing1314/alipay-asset-display/actions/workflows/ci.yml/badge.svg" alt="Checks" /></a>
-  <a href="https://github.com/FengYing1314/alipay-asset-display/releases/tag/v0.1.0"><img src="https://img.shields.io/badge/version-v0.1.0--preview-0F766E" alt="v0.1.0 预发布版" /></a>
+  <a href="https://github.com/FengYing1314/alipay-asset-display/releases/tag/v1.0.0"><img src="https://img.shields.io/badge/version-v1.0.0-0F766E" alt="v1.0.0 稳定发行版" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-0F766E" alt="MIT 许可证" /></a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/FengYing1314/alipay-asset-display/releases/tag/v0.1.0"><strong>下载 APK</strong></a> ·
+  <a href="https://github.com/FengYing1314/alipay-asset-display/releases/tag/v1.0.0"><strong>下载 APK</strong></a> ·
   <a href="docs/usage.md">使用指南</a> ·
   <a href="#常见问题">常见问题</a> ·
   <a href="https://github.com/FengYing1314/alipay-asset-display/issues/new/choose">问题反馈</a>
@@ -21,7 +21,7 @@
 
 基于 LSPosed API 102，仅改变本机显示文本、绘制副本和朗读描述，不改变真实资产、账户数据、网络响应或支付能力。
 
-> **当前版本为开发预发布版。** 下载附件使用 Debug 签名，尚非稳定版。当前包名尚未完成实机验收；已有测试与历史设备验证的覆盖范围见 [验证记录](docs/verification.md#当前验证状态)。
+> **当前稳定发行版为 v1.0.0。** 使用固定的专用 Release 签名，支持范围仍限定于下表。正式发布不代表所有设备与页面均已完成实机验收，当前包名的完整实机矩阵仍未完成；已有检查与历史设备验证的覆盖范围见 [验证记录](docs/verification.md#当前验证状态)。
 
 ## 功能与边界
 
@@ -50,7 +50,7 @@
 
 ## 使用与安装
 
-1. 从 [v0.1.0 预发布页](https://github.com/FengYing1314/alipay-asset-display/releases/tag/v0.1.0) 下载 `alipay-asset-display-v0.1.0-debug.apk` 并安装。
+1. 从 [v1.0.0 正式发布页](https://github.com/FengYing1314/alipay-asset-display/releases/tag/v1.0.0) 下载并安装 `alipay-asset-display-v1.0.0.apk`。已安装旧 Debug 包的用户先阅读 [更新与签名](docs/usage.md#更新与签名)。
 2. 在 LSPosed 中启用“支付宝资产显示修改”，作用域勾选 **支付宝**。
 3. 完全退出并重新打开支付宝，使模块随新进程加载。
 4. 打开模块设置，确认框架连接，填写四项金额，打开 **启用金额显示**，点击 **保存配置**。
@@ -58,15 +58,15 @@
 
 “保存成功”表示框架确认配置写入，目标页面是否应用还需实际查看。完整步骤、金额格式、停用及恢复方式见 [使用指南](docs/usage.md)。
 
-### 获取预发布版
+### 获取正式发行版
 
-[Release 页面](https://github.com/FengYing1314/alipay-asset-display/releases/tag/v0.1.0) 同时提供 APK 与 `SHA256SUMS`，用于核对下载完整性。校验方法见 [下载与校验](docs/usage.md#下载与校验)。
+[Release 页面](https://github.com/FengYing1314/alipay-asset-display/releases/tag/v1.0.0) 提供 APK、`SHA256SUMS` 和 `SIGNING-CERTIFICATE.txt`，分别用于安装、核对文件完整性和核对发行签名证书指纹。仓库也保留 [发行证书信息](SIGNING-CERTIFICATE.txt)，操作方法见 [下载与校验](docs/usage.md#下载与校验)。
 
-不同环境生成的 Debug 包可能使用不同签名，未必能覆盖安装。更新前请记录四项配置，并阅读 [更新与签名](docs/usage.md#更新与签名)。
+从 v1.0.0 起，正式 Release 使用固定发行密钥。历史 v0.1.0 和 Actions 构建仍为 Debug 签名，不能直接覆盖迁移到新 Release 签名；请先记录配置，再按 [迁移说明](docs/usage.md#更新与签名) 自行处理已有安装。
 
 ### 获取 Actions 构建包
 
-需要更新的开发构建时，可从成功的 [Checks 运行](https://github.com/FengYing1314/alipay-asset-display/actions/workflows/ci.yml) 下载 APK；需要登录 GitHub，产物保留 7 天。[获取步骤与限制](docs/usage.md#获取-actions-构建包)。
+需要更新的开发构建时，可从成功的 [Checks 运行](https://github.com/FengYing1314/alipay-asset-display/actions/workflows/ci.yml) 下载 Debug APK；需要登录 GitHub，产物保留 7 天。这些包不使用正式发行签名，不能直接覆盖 Release 安装。[获取步骤与限制](docs/usage.md#获取-actions-构建包)。
 
 ### 从旧包名迁移
 

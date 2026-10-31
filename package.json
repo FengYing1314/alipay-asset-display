@@ -1,6 +1,6 @@
 {
   "name": "alipay-asset-display",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "description": "支付宝本机显示模块的开发和验证工具",

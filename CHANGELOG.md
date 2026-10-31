@@ -1,6 +1,25 @@
 # 变更记录
 
-此文件记录面向使用者和贡献者的变化。`0.1.0` 为开发预发布版，不是稳定版。
+此文件记录面向使用者和贡献者的变化。`1.0.0` 为首个正式发行版；历史 `0.1.0` 保留为开发预发布版。
+
+## [1.0.0](https://github.com/FengYing1314/alipay-asset-display/releases/tag/v1.0.0) - 2026-11-01
+
+### 新增
+
+- 正式 Release 安装包 `alipay-asset-display-v1.0.0.apk`，使用固定的专用发行密钥签名。
+- 随发行提供 `SHA256SUMS` 和 `SIGNING-CERTIFICATE.txt`，支持文件完整性与签名证书指纹核对。
+- 以维护者头像与支付宝视觉元素为参考的新项目图标，用于应用与 GitHub 首页。
+
+### 调整
+
+- README 默认下载入口切换到正式 Release，使用指南补充签名核验、Debug 迁移及版本更新说明。
+- 发行密钥仅保存在维护者本机仓库之外；CI 验证未签名 Release 构建，继续提供 Debug 开发产物，不自动签名或发布。
+- 保持现有显示逻辑、配置格式、包名及严格兼容范围。正式发布不代表当前包名已完成全部设备与页面的实机矩阵，具体范围见 [验证记录](docs/verification.md#当前验证状态)。
+
+### 迁移
+
+- 新 Release 签名与历史 `0.1.0` 及 Actions Debug 签名不兼容，不能直接覆盖安装。请先记录四项金额和开关状态，再自行停用、卸载旧 Debug 包并安装 Release；配置不会自动迁移。
+- 从旧包名 `io.github.fengying.alipaydisplaydemo` 迁移时仍需停用旧模块、配置新模块作用域。完整操作见 [更新与签名](docs/usage.md#更新与签名) 和 [旧包名迁移](docs/usage.md#从旧包名迁移)。
 
 ## [0.1.0](https://github.com/FengYing1314/alipay-asset-display/releases/tag/v0.1.0) - 2026-11-01（预发布）
 

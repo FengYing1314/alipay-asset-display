@@ -2,6 +2,15 @@ plugins {
     id 'com.android.application'
 }
 
+def releaseSigningValues = [
+        storeFile: providers.environmentVariable('ALIPAY_RELEASE_STORE_FILE').orNull,
+        storePassword: providers.environmentVariable('ALIPAY_RELEASE_STORE_PASSWORD').orNull,
+        keyAlias: providers.environmentVariable('ALIPAY_RELEASE_KEY_ALIAS').orNull,
+        keyPassword: providers.environmentVariable('ALIPAY_RELEASE_KEY_PASSWORD').orNull
+]
+def releaseSigningValueCount = releaseSigningValues.values().count { it != null && !it.isEmpty() }
+def hasReleaseSigning = releaseSigningValueCount == releaseSigningValues.size()
+
 android {
     namespace = 'io.github.fengying.alipaydisplay'
     compileSdk {
@@ -15,13 +24,27 @@ android {
         applicationId = 'io.github.fengying.alipaydisplay'
         minSdk = 28
         targetSdk = 35
-        versionCode = 1
-        versionName = '0.1.0'
+        versionCode = 2
+        versionName = '1.0.0'
+    }
+
+    signingConfigs {
+        if (hasReleaseSigning) {
+            release {
+                storeFile = file(releaseSigningValues.storeFile)
+                storePassword = releaseSigningValues.storePassword
+                keyAlias = releaseSigningValues.keyAlias
+                keyPassword = releaseSigningValues.keyPassword
+            }
+        }
     }
 
     buildTypes {
         release {
             minifyEnabled = false
+            if (hasReleaseSigning) {
+                signingConfig = signingConfigs.release
+            }
         }
     }
 
@@ -29,6 +52,11 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+}
+
+// CI 可构建未签名 Release；签名参数填写不完整时禁止继续，避免误发未签名包。
+if (releaseSigningValueCount != 0 && releaseSigningValueCount != releaseSigningValues.size()) {
+    throw new GradleException('正式签名需同时设置 ALIPAY_RELEASE_STORE_FILE、ALIPAY_RELEASE_STORE_PASSWORD、ALIPAY_RELEASE_KEY_ALIAS 和 ALIPAY_RELEASE_KEY_PASSWORD')
 }
 
 dependencies {

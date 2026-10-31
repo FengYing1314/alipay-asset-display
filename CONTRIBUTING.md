@@ -32,6 +32,29 @@ sh scripts/check.sh --android
 ./gradlew --offline --no-daemon :app:testDebugUnitTest :app:assembleDebug :app:lintDebug
 ```
 
+## Release 构建与签名
+
+正式发行另外验证 Release 变体：
+
+```bash
+./gradlew --no-daemon :app:assembleRelease :app:lintRelease
+```
+
+没有提供签名环境变量时，这条命令生成 `app/build/outputs/apk/release/app-release-unsigned.apk`，供 CI 检查构建，不可作为正式安装包发布。需要签名时，由本机安全存储向构建进程提供以下四项环境变量：
+
+| 环境变量                        | 含义                         |
+| ------------------------------- | ---------------------------- |
+| `ALIPAY_RELEASE_STORE_FILE`     | 仓库外的发行密钥文件绝对路径 |
+| `ALIPAY_RELEASE_STORE_PASSWORD` | 密钥库密码                   |
+| `ALIPAY_RELEASE_KEY_ALIAS`      | 发行密钥别名                 |
+| `ALIPAY_RELEASE_KEY_PASSWORD`   | 私钥密码                     |
+
+四项全部提供后，同一构建命令输出 `app/build/outputs/apk/release/app-release.apk`。只提供部分参数会直接失败，不会回退到 Debug 签名。不要将密码写入命令行参数、仓库配置、构建日志或发布附件。
+
+正式版本持续使用同一发行密钥。发布前用 Android SDK 的 `apksigner verify --verbose --print-certs` 核验安装包，将证书 SHA-256 与仓库 [发行证书信息](SIGNING-CERTIFICATE.txt) 对照；同时检查包名、版本和非 Debug 标记，生成 `SHA256SUMS`。源码提交通过 CI 后，Release 附件提供带版本号的 APK、校验文件和证书指纹文件。
+
+CI 不持有发行密钥，仅验证未签名 Release 及 Debug 变体，上传的开发 APK 仍使用 Debug 签名。旧 Debug 包与正式发行包的迁移步骤见 [更新与签名](docs/usage.md#更新与签名)。
+
 ## 日常检查与格式
 
 只检查源码和脚本时运行以下命令，不要求设备或 Android SDK：
@@ -63,6 +86,8 @@ scripts/                格式与检查入口
 ```
 
 组件职责和显示链路见 [架构说明](docs/architecture.md)。
+
+项目图标原图为 `docs/assets/icon.png`，应用使用相同图像及 Android 自适应图标资源。生成参考与完整提示词见 [图标生成记录](docs/assets/icon-prompt.txt)；调整图标时核对 [Android 自适应图标安全区域](https://developer.android.com/develop/ui/compose/system/icon_design_adaptive)。
 
 ## 代码和注释标准
 

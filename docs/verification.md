@@ -6,7 +6,11 @@
 
 以下状态截至 2026-11-01。
 
-提交 `15691b7` 的 [GitHub Actions 检查](https://github.com/FengYing1314/alipay-asset-display/actions/runs/41246157100) 已成功完成源码与 JavaScript 检查，以及 Android 单元测试、Debug 构建和 Lint。该结果证明此提交通过远端工程检查，不代表已完成设备安装或宿主页面验收。
+`v1.0.0` 的本地发行检查已完成：129 项 Java 单元测试、105 项 JavaScript 测试、文本及格式检查通过；Release 构建和 Lint 通过，仅保留既有 `DataExtractionRules` 备份声明提示。
+
+已核对签名 APK 的应用 ID、版本 `1.0.0` / 版本代码 `2`、非 Debug 标记、专用发行证书、LSPosed 入口、图标、脚本及回调桥资源，宿主 SDK 编译桩未打包。公开证书指纹见 [发行证书信息](../SIGNING-CERTIFICATE.txt)。本次未向设备安装 APK，也未修改设备中的模块、配置或数据。
+
+早期提交 `15691b7` 的 [GitHub Actions 检查](https://github.com/FengYing1314/alipay-asset-display/actions/runs/41246157100) 已成功完成源码与 JavaScript 检查，以及 Android 单元测试、Debug 构建和 Lint。该结果仅证明此历史提交通过远端工程检查；正式发行提交的 CI 结果以对应 Release 说明中的运行链接为准。
 
 当前包名 `io.github.fengying.alipaydisplay` 尚未完成实机验收。下方保留各阶段的原始验证记录；迁移前的设备检查只作为历史基线，不能直接归入新包名的验证结果。新包安装、配置迁移、各目标页面和深浅色、横屏、大字体等设备检查仍需单独记录。
 

@@ -8,6 +8,7 @@ local.properties
 *.apks
 *.jks
 *.keystore
+*.p12
 *.hprof
 captures/
 .DS_Store
